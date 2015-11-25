@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
 
+  # Blogo
+  Blogo::Routes.mount_to(self, at: '/story')
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
