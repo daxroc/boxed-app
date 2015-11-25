@@ -2,12 +2,12 @@ image: ruby2.0.0
 script:
   - mkdir -p /tmp/bundler
   - sudo chown ubuntu:ubuntu /tmp/bundler
-  - bundle install --path=/tmp/bundler --deployment --quiet
+  - bundle install --path=/tmp/bundler --deployment
   - bundle exec rake test
 services:
   - postgres
 env:
-  - PG_USER=postgresql
+  - PG_USER=postgres
   - PG_PASSWORD=""
   - PG_HOSTNAME=localhost
   - RAILS_ENV=test
