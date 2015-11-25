@@ -1,4 +1,4 @@
-image: rails:onbuild
+image: ruby2.0.0
 script:
   - mkdir -p /tmp/bundler
   - sudo chown ubuntu:ubuntu /tmp/bundler
