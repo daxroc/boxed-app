@@ -3,8 +3,7 @@ script:
   - mkdir -p /tmp/bundler
   - sudo chown ubuntu:ubuntu /tmp/bundler
   - bundle install --path=/tmp/bundler --deployment
-  - su - postgre -c 'dropdb boxed_'
-  - su - postgre -c 'createdb boxed_'
+  - psql -c 'drop database boxed_;create database boxed_;' -U postgres -h 127.0.0.1
   - bundle exec rake test
 services:
   - postgres
