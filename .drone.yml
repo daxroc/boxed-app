@@ -26,4 +26,11 @@ compose:
   database:
     image: postgres:9.4.5
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=postgresi
+
+
+deploy:
+  git_push:
+    branch: master
+    remote: ssh://git@deis.app.6th.io:2222/tested-jokester.git
+    force: true
