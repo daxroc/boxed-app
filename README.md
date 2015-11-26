@@ -1,6 +1,6 @@
 # boxed-app
 
-IDE Application
+[![Build Status](http://drone.ci.6th.io/api/badges/daxroc/boxed-app/status.svg)](http://drone.ci.6th.io/daxroc/boxed-app)
 
 
 
