@@ -1,21 +1,30 @@
-image: ruby2.0.0
-script:
-  - mkdir -p /tmp/bundler
-  - sudo chown ubuntu:ubuntu /tmp/bundler
-  - bundle install --path=/tmp/bundler --deployment
-  - psql -c 'drop database if exists boxed_;' -U postgres -h 127.0.0.1
-  - psql -c 'create database boxed_;' -U postgres -h 127.0.0.1
-  - bundle exec rake db:migrate
-  - bundle exec rake test
-services:
-  - postgres
-env:
-  - PG_USER=postgres
-  - PG_PASSWORD=""
-  - PG_HOSTNAME=localhost
-  - RAILS_ENV=test
-cache:
-  - /tmp/bundler
-notify:
-  email:
-    recipients:
+lone:
+  path: github.com/daxroc/boxed-app
+
+build:
+  cache:
+    mount:
+    - bundler
+  image: ruby:2.2.3-onbuild
+  environment:
+    - RAILS_ENV=test
+    - PG_USER=postgres
+    - PG_PASSWORD=""
+    - PG_HOSTNAME=127.0.0.1
+  commands:
+    - apt-get -q=2 update
+    - apt-get -q=2 install postgresql-client
+    - apt-get -q=2 install nodejs
+    - mkdir -p bundler
+    - ls bundler/
+    - bundle install --path=bundler --deployment
+    - psql -c 'drop database if exists boxed_;' -U postgres -h 127.0.0.1
+    - psql -c 'create database boxed_;' -U postgres -h 127.0.0.1
+    - bundle exec rake db:migrate
+    - bundle exec rake test
+
+compose:
+  database:
+    image: postgres:9.4.5
+    environment:
+      - POSTGRES_USER=postgres
