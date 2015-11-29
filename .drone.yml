@@ -33,4 +33,4 @@ deploy:
   git_push:
     branch: master
     remote: ssh://git@deis.app.6th.io:2222/hearty-instinct.git
-    force: true
+    force: false
